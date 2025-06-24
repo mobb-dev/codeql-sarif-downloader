@@ -31,18 +31,12 @@ def list_codeql_analyses(repo, headers):
 
 def group_analyses(analyses):
     sets = {}
-    seen = set()
     for a in analyses:
         ref = a.get('ref', 'unknown')
         tool = a.get('tool', {}).get('name', 'unknown')
         created_at = a.get('created_at', 'unknown')
         commit_sha = a.get('commit_sha', 'unknown')
         category = a.get('category', 'unknown')
-        # Only consider unique (ref, commit_sha, category)
-        unique_key = (ref, commit_sha, category)
-        if unique_key in seen:
-            continue
-        seen.add(unique_key)
         set_key = f'ref: {ref} | commit: {commit_sha}'
         sets.setdefault(set_key, []).append({
             'tool': tool,
@@ -66,6 +60,8 @@ def choose_set(sets):
 
 def download_sarif(repo, analyses, headers):
     import re
+    temp_dir = os.path.join(SARIF_DIR, 'temp')
+    os.makedirs(temp_dir, exist_ok=True)
     os.makedirs(SARIF_DIR, exist_ok=True)
     sarif_runs = []
     owner_repo = repo.replace('/', '_')
@@ -92,8 +88,8 @@ def download_sarif(repo, analyses, headers):
         sarif_json = resp.json()
         if 'runs' in sarif_json:
             sarif_runs.extend(sarif_json['runs'])
-        # Save each SARIF individually as before
-        out_file = os.path.join(SARIF_DIR, f'sarif_{analysis_id}.json')
+        # Save each SARIF individually in temp folder
+        out_file = os.path.join(temp_dir, f'sarif_{analysis_id}.json')
         with open(out_file, 'w', encoding='utf-8') as f:
             json.dump(sarif_json, f, indent=2)
         print(f'Downloaded SARIF to {out_file}')
