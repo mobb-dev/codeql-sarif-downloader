@@ -46,7 +46,7 @@ This tool helps you download and combine CodeQL SARIF reports from GitHub for a 
 
 ```
 $ python generate_sarif_from_github_codeql.py
-Enter the GitHub repository (owner/repo): antonychiu2/codeql-mobb-fixer-integration
+Enter the GitHub repository (owner/repo): **antonychiu2/codeql-mobb-fixer-integration**
 
 Available scan sets:
 1. ref: refs/heads/CodeQL | commit: 39bd235d5657c595f2e23a7c0356e81f5fa22c94 (3 runs)
@@ -54,13 +54,13 @@ Available scan sets:
     - Run 2: Date: 2025-06-20T09:49:36Z, Tool: CodeQL, Category: /language:javascript-typescript
     - Run 3: Date: 2025-06-20T09:49:26Z, Tool: CodeQL, Category: /language:actions
 ...
-Select a set to download SARIF from (number): 1
+Select a set to download SARIF from (number): **1**
 
 Downloading SARIF for set: ref: refs/heads/CodeQL | commit: 39bd235d5657c595f2e23a7c0356e81f5fa22c94
 Downloaded SARIF to sarif_downloads/sarif_537505567.json
 Downloaded SARIF to sarif_downloads/sarif_537504982.json
 Downloaded SARIF to sarif_downloads/sarif_537504820.json
-Combined SARIF written to sarif_downloads/codeql_sarif_antonychiu2_codeql-mobb-fixer-integration_refs_heads_CodeQL_20250620095007.json
+Combined SARIF written to sarif_downloads/**codeql_sarif_antonychiu2_codeql-mobb-fixer-integration_refs_heads_CodeQL_20250620095007.json**
 ```
 
 ## Output
