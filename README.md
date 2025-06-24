@@ -10,7 +10,7 @@ This tool helps you download and combine CodeQL SARIF reports from GitHub for a 
 
 ## Setup
 1. **Generate a GitHub Personal Access Token (PAT):**
-   - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
+   - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/personal-access-tokens)
    - Click "Generate new token"
    - Select the following scopes:
      - `repo` (for private repos; not required for public repos)
