@@ -13,8 +13,7 @@ This tool helps you download and combine CodeQL SARIF reports from GitHub for a 
    - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/personal-access-tokens)
    - Click "Generate new token"
    - Select the following scopes:
-     - `repo` (for private repos; not required for public repos)
-     - `security_events`
+     - `Code scanning alerts`: `read`
    - Copy the generated token (you will use it in the next step)
 
 2. **Edit `config.json`:**
