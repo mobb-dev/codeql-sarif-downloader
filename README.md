@@ -3,12 +3,59 @@
 This tool helps you download and combine CodeQL SARIF reports from GitHub for a given repository, branch/PR, and commit. It is useful for extracting multi-language CodeQL scan results and producing a single SARIF file for further processing or integration.
 
 ## Prerequisites
-- Python 3.7+
+- Python 3.7+ (only needed for option 2 - which is running the script locally)
 - A GitHub Personal Access Token (PAT) with the following scopes:
   - `repo` (for private repositories)
   - `security_events`
 
 ## Setup
+
+### Option 1: Docker from Docker Hub (Easiest)
+1. **Set your GitHub PAT as environment variable:**
+   ```bash
+   # Linux/macOS
+   export GITHUB_PAT="your_github_pat_here"
+   
+   # Windows PowerShell
+   $env:GITHUB_PAT = "your_github_pat_here"
+   ```
+
+2. **Run directly from Docker Hub:**
+   ```bash
+   # Create output directory
+   mkdir sarif_downloads
+   
+   # Run the tool
+   docker run --rm -it \
+     -e GITHUB_PAT="$GITHUB_PAT" \
+     -v "$(pwd)/sarif_downloads:/app/sarif_downloads" \
+     mobbantony/codeql-sarif-downloader:latest
+   ```
+
+### Option 2: Docker - Build Locally
+1. **Set your GitHub PAT as environment variable:**
+   ```bash
+   # Linux/macOS
+   export GITHUB_PAT="your_github_pat_here"
+   
+   # Windows PowerShell
+   $env:GITHUB_PAT = "your_github_pat_here"
+   ```
+
+2. **Run with Docker:**
+   ```bash
+   # Using wrapper script (Linux/macOS)
+   ./run.sh
+   
+   # Using wrapper script (Windows)
+   .\run.ps1
+   
+   # Or directly with Docker
+   docker build -t codeql-sarif-downloader .
+   docker run --rm -it -e GITHUB_PAT="$GITHUB_PAT" -v "$(pwd)/sarif_downloads:/app/sarif_downloads" codeql-sarif-downloader
+   ```
+
+### Option 2: Local Python Installation
 1. **Generate a GitHub Personal Access Token (PAT):**
    - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/personal-access-tokens)
    - Click "Generate new token"
@@ -32,6 +79,10 @@ This tool helps you download and combine CodeQL SARIF reports from GitHub for a 
 
 4. **Run the script:**
    ```sh
+   # With Docker (recommended)
+   ./run.sh  # or .\run.ps1 on Windows
+   
+   # Or with local Python
    python generate_sarif_from_github_codeql.py
    ```
 

@@ -8,8 +8,21 @@ SARIF_DIR = 'sarif_downloads'
 
 # Load config
 def load_config():
-    with open(CONFIG_FILE, 'r') as f:
-        return json.load(f)
+    # First try environment variable (preferred for Docker)
+    github_pat = os.getenv('GITHUB_PAT')
+    if github_pat:
+        return {'github_pat': github_pat}
+    
+    # Fall back to config file
+    if os.path.exists(CONFIG_FILE):
+        with open(CONFIG_FILE, 'r') as f:
+            return json.load(f)
+    
+    # If neither exists, show error
+    print("Error: GitHub PAT not found. Please either:")
+    print("1. Set GITHUB_PAT environment variable, or")
+    print("2. Create config.json with your GitHub PAT")
+    sys.exit(1)
 
 def get_github_headers(token):
     return {
