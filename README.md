@@ -3,7 +3,7 @@
 This tool helps you download and combine CodeQL SARIF reports from GitHub for a given repository, branch/PR, and commit. It is useful for extracting multi-language CodeQL scan results and producing a single SARIF file for further processing or integration.
 
 ## Prerequisites
-- Python 3.7+ (only needed for option 2 - which is running the script locally)
+- Python 3.7+ (only needed for option 3 - running the script locally)
 - A GitHub Personal Access Token (PAT) with the following scopes:
   - `repo` (for private repositories)
   - `security_events`
@@ -55,7 +55,7 @@ This tool helps you download and combine CodeQL SARIF reports from GitHub for a 
    docker run --rm -it -e GITHUB_PAT="$GITHUB_PAT" -v "$(pwd)/sarif_downloads:/app/sarif_downloads" codeql-sarif-downloader
    ```
 
-### Option 2: Local Python Installation
+### Option 3: Local Python Installation
 1. **Generate a GitHub Personal Access Token (PAT):**
    - Go to [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/personal-access-tokens)
    - Click "Generate new token"
